@@ -47,12 +47,15 @@ public class MyLinkedList<E> {
   }
   public MyLinkedList() {
     size = 0;
-    start = new Node(0,null,null);
+    start = new Node(null,null,null);
     end = start;
+  }
+  public int size() {
+    return size;
   }
   public void clear() {
     size = 0;
-    start = new Node(0,null,null);
+    start = new Node(null,null,null);
     end = start;
   }
   public boolean add(E value) {
@@ -85,7 +88,7 @@ public class MyLinkedList<E> {
   public E removeFront() {
     E ans = start.getData();
     if (size == 1) {
-      start = new Node(0,null,null);
+      start = new Node(null,null,null);
       end = start;
     }
     else if (size == 2) {
@@ -94,7 +97,7 @@ public class MyLinkedList<E> {
     }
     else {
       end.setPrev(null);
-      start = start.getNext();
+      start = start.next();
     }
     return ans;
   }
