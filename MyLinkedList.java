@@ -1,23 +1,16 @@
 public class MyLinkedList<E> {
   class Node {
     private E data;
-    private Node next,prev;
-    public Node(E value, Node p,Node n) {
+    private Node next;
+    public Node(E value, Node n) {
       data = value;
       next = n;
-      prev = p;
     }
     public Node next() {
       return next;
     }
-    public Node prev() {
-      return prev;
-    }
     public void setNext(Node other) {
       next = other;
-    }
-    public void setPrev(Node other) {
-      prev = other;
     }
     public String toString() {
       return "" + data;
@@ -47,7 +40,7 @@ public class MyLinkedList<E> {
   }
   public MyLinkedList() {
     size = 0;
-    start = new Node(null,null,null);
+    start = new Node(null,null);
     end = start;
   }
   public int size() {
@@ -55,26 +48,21 @@ public class MyLinkedList<E> {
   }
   public void clear() {
     size = 0;
-    start = new Node(null,null,null);
+    start = new Node(null,null);
     end = start;
   }
   public boolean add(E value) {
-    if (size == 0) {
-      start = new Node(value,null,null);
-      end = start;
-      size++;
+    size++;
+    if (size == 1) {
+      start.setData(value);
       return true;
     }
-    Node next = new Node(value,end,null);
+    Node next = new Node(value,null);
     end.setNext(next);
     end = next;
-    size++;
     return true;
   }
   public void extend(MyLinkedList<E> other) {
-    if (size != 0) {
-      other.start.setPrev(end);
-    }
     if (other.size != 0) {
       end.setNext(other.start);
       end = other.end;
@@ -83,20 +71,18 @@ public class MyLinkedList<E> {
       start = other.start;
     }
     size += other.size();
-    other.size = 0;
   }
   public E removeFront() {
+    size--;
     E ans = start.getData();
     if (size == 1) {
-      start = new Node(null,null,null);
+      start = new Node(null,null);
       end = start;
     }
     else if (size == 2) {
-      end.setPrev(null);
-      start = end;
+      
     }
     else {
-      end.setPrev(null);
       start = start.next();
     }
     return ans;
