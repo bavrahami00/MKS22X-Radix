@@ -18,6 +18,15 @@ public class Radix {
         temp = set.removeFront();
         buckets[9+((temp/(int)Math.pow(10,x))%10)].add(temp);
       }
+      for (int i = 0; i < buckets.length; i++) {
+        set.extend(buckets[i]);
+        buckets[i].clear();
+      }
+    }
+    int count = 0;
+    while (set.size() > 0) {
+      data[count] = set.removeFront();
+      count++;
     }
   }
 }

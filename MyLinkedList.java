@@ -73,18 +73,19 @@ public class MyLinkedList<E> {
     size += other.size();
   }
   public E removeFront() {
-    size--;
     E ans = start.getData();
     if (size == 1) {
       start = new Node(null,null);
       end = start;
     }
     else if (size == 2) {
-      
+      start = start.next();
+      end = start;
     }
     else {
       start = start.next();
     }
+    size--;
     return ans;
   }
 }
